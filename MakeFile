@@ -3,7 +3,7 @@ LAMBDA_FUNCTION_NAME = my-lambda-function
 LAMBDA_PACKAGE_NAME = lambda_function.zip  
 
 # Define variables for Terraform scripts
-TF_DIR = terraform  # path to your Terraform scripts directory
+TF_DIR = terraform 
 
 .PHONY: all
 all: package deploy test  # Default target that packages, deploys, and runs tests
