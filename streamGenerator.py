@@ -2,6 +2,8 @@ import boto3
 import datetime
 import json
 
+#A simple Python Script for generating a numer of events to a Kinesis Data Stream
+
 # Create a Kinesis client
 kinesis_client = boto3.client('kinesis', region_name='eu-norht-1')  # Replace with your desired region
 
