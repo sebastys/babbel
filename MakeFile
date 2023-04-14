@@ -1,0 +1,43 @@
+# Define variables for Lambda function deployment
+LAMBDA_FUNCTION_NAME = my-lambda-function  
+LAMBDA_PACKAGE_NAME = lambda_function.zip  
+
+# Define variables for Terraform scripts
+TF_DIR = terraform  # path to your Terraform scripts directory
+
+.PHONY: all
+all: package deploy test  # Default target that packages, deploys, and runs tests
+
+# Package Lambda function code
+package:
+	@echo "Packaging Lambda function code..."
+	zip -r $(LAMBDA_PACKAGE_NAME) lambda_function.py  
+	@echo "Lambda function code packaged as $(LAMBDA_PACKAGE_NAME)"
+
+# Deploy Lambda function using AWS CLI
+deploy: package
+	@echo "Deploying Lambda function..."
+	aws lambda update-function-code --function-name $(LAMBDA_FUNCTION_NAME) --zip-file fileb://$(LAMBDA_PACKAGE_NAME)
+	@echo "Lambda function deployed"
+
+# Run tests
+test:
+	@echo "Running tests..."
+	python -m unittest discover tests  # Path to your tests directory
+
+# Create/update AWS resources using Terraform
+terraform-init:
+	@echo "Initializing Terraform..."
+	cd $(TF_DIR) && terraform init
+
+terraform-plan: terraform-init
+	@echo "Planning Terraform changes..."
+	cd $(TF_DIR) && terraform plan
+
+terraform-apply: terraform-init
+	@echo "Applying Terraform changes..."
+	cd $(TF_DIR) && terraform apply
+
+terraform-destroy: terraform-init
+	@echo "Destroying Terraform resources..."
+	cd $(TF_DIR) && terraform destroy
