@@ -30,25 +30,25 @@ The solution consists of the following components:
 ## Solution Deployment
 ### Prerequisites
 •	AWS account with appropriate permissions to create and manage Kinesis streams, Lambda functions, and S3 buckets.
+
 •	Python 3 installed on the development environment.
+
 •	Boto3 Python library installed on the development environment.
+
 •	Terraform installed on the development environment for provisioning AWS resources.
 
 
 #### 	Deployment Steps
 1. Clone the repository and navigate to the project directory.
 2. Update the terraform.tfvars file with the appropriate values for your AWS account, region, and other configurations.
-3. Run make init to initialize the Terraform working directory.
-4. Run make apply to provision the AWS resources using Terraform scripts.
-5. Run make package to package the Lambda function code.
-6. Run make deploy to deploy the Lambda function using the AWS CLI.
-7. Run make test to execute the tests for the solution.
-Running Tests
-The solution includes automated tests to validate the functionality of the Lambda function. The tests are implemented using Python's built-in unittest framework and can be executed using the following command:
-```bash
+3. Run terraform init to initialize the Terraform working directory.
+4. Run terraform plan to check the desired output
+5.  Run terraform apply to provision the AWS resources using Terraform scripts.
 
-$make test 
-```
+
+
+### You can use the file StreamGenerator.py for creating the 1M events
+
 
 The tests cover various scenarios, including processing events from the Kinesis stream, extracting fields from JSON events, and storing events in S3 bucket. You can extend the tests or add additional tests as needed to suit your specific use case.
 Conclusion
