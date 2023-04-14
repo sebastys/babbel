@@ -8,7 +8,7 @@ The solution consists of the following components:
 
 •	Kinesis Stream: An AWS Kinesis stream that serves as the source of events. It receives events from various sources and streams them in real-time.
 
-•	 An SQS Queue for the incoming stream and bus system for the later processing.
+•	 An SQS Queue for the bus system for the later processing.
 
 •	Lambda Function: An AWS Lambda function that is triggered by events from the Kinesis stream. The Lambda function is implemented in Python 3 and processes the incoming JSON events, extracting common fields (event_uuid, event_name, created_at), adding additional fields (created_datetime, event_type, event_subtype), and storing the enriched events in an S3 bucket.
 
